@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/sky_background_green_hills.png-a7dcde9bba03434eb2f5ec099625a81c.image"
+
+[deps]
+
+source_file="res://plane_pack/sky_background/example/sky_background_green_hills.png"
+dest_files=[ "res://.import/sky_background_green_hills.png-a7dcde9bba03434eb2f5ec099625a81c.image" ]
+
+[params]
+
