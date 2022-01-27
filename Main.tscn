@@ -1,19 +1,26 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Menu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Background.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Coin.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 1920, 128, 0, 0, 0, 0, 1920, 896 )
 }
 
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array(  )
+}
+
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
 Enemy = ExtResource( 3 )
+Coin = ExtResource( 6 )
 
 [node name="Background" parent="." instance=ExtResource( 5 )]
 
@@ -37,9 +44,20 @@ rotation = 1.5708
 
 [node name="Menu" parent="." instance=ExtResource( 4 )]
 
+[node name="CoinsPath" type="Path2D" parent="."]
+curve = SubResource( 2 )
+
+[node name="CoinsSpawnLocation" type="PathFollow2D" parent="CoinsPath"]
+position = Vector2( 1920, 128 )
+rotation = 1.5708
+
+[node name="CoinsSpawnTimer" type="Timer" parent="."]
+wait_time = 4.0
+
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="StartDelay" to="." method="_on_StartDelay_timeout"]
 [connection signal="empty" from="Player" to="." method="game_over"]
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="shooting" from="Player" to="." method="_on_Player_shooting"]
 [connection signal="start_game" from="Menu" to="." method="new_game"]
+[connection signal="timeout" from="CoinsSpawnTimer" to="." method="_on_CoinsSpawnTimer_timeout"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://plane_pack/planes/plane_2/plane_2_blue.png" type="Texture" id=1]
 [ext_resource path="res://Enemy.gd" type="Script" id=2]
 [ext_resource path="res://plane_pack/planes/plane_2/plane_2_red.png" type="Texture" id=3]
 [ext_resource path="res://plane_pack/planes/plane_2/plane_2_yellow.png" type="Texture" id=4]
 [ext_resource path="res://plane_pack/planes/plane_2/plane_2_green.png" type="Texture" id=5]
+[ext_resource path="res://EnemyBullet.tscn" type="PackedScene" id=6]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -13,14 +14,14 @@ animations = [ {
 "name": "plane_green",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "plane_red",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "plane_yellow",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "plane_red",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ) ],
@@ -32,11 +33,10 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 50.5582, 27.8068 )
 
-[node name="Enemy" type="Area2D" groups=[
-"enemies",
-]]
+[node name="Enemy" type="Area2D" groups=["enemies"]]
 collision_mask = 0
 script = ExtResource( 2 )
+bullet = ExtResource( 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.1, 0.1 )
@@ -51,5 +51,12 @@ shape = SubResource( 2 )
 position = Vector2( 0.235971, -0.117982 )
 scale = Vector2( 5.05866, 2.78156 )
 
+[node name="BulletPosition" type="Position2D" parent="."]
+position = Vector2( -51.7129, 10.0794 )
+
+[node name="BulletSpawn" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="area_entered" from="." to="." method="_on_Enemy_area_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="BulletSpawn" to="." method="_on_BulletSpawn_timeout"]

@@ -24,7 +24,9 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Area2D" groups=["player"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -35,7 +37,7 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="BulletPosition" type="Position2D" parent="."]
-position = Vector2( 45.362, 1.6629 )
+position = Vector2( 42.5779, 2.21971 )
 
 [node name="Explosion" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.1, 0.1 )

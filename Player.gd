@@ -8,7 +8,7 @@ export var playing = false
 signal hit
 signal empty
 signal shooting
-
+signal coin_hit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -41,8 +41,8 @@ func _process(delta):
 			velocity = velocity.normalized() * speed
 		
 		position += velocity * delta
-		position.x = clamp(position.x, 0, screen_size.x)
-		position.y = clamp(position.y, 0, screen_size.y)
+		position.x = clamp(position.x, 10, screen_size.x-10)
+		position.y = clamp(position.y, 10, screen_size.y-10)
 
 
 func shoot():
@@ -58,6 +58,14 @@ func start(pos):
 	$CollisionShape2D.disabled = false
 
 func _on_Player_area_entered(area):
+	print(area.get_name())
+	if ("Coin" in area.get_name()):
+		emit_signal("coin_hit")
+		area.queue_free()
+	else:
+		plane_died(area)
+	
+func plane_died(area):
 	playing = false
 	$Sprite.hide()
 	area.queue_free()
