@@ -1,11 +1,12 @@
 extends Area2D
 
-export var min_speed = 300
-export var max_speed = 500
+export var min_speed = 500
+export var max_speed = 750
 export (PackedScene) var bullet
 var velocity
-signal enemy_hit
 signal enemy_shooting
+signal enemy_escaped
+signal enemy_hit
 var ran
 
 
@@ -17,6 +18,7 @@ func _ready():
 	ran = rand_range(0, 100)
 	if (ran <= 25):
 		$BulletSpawn.start()
+		velocity = Vector2(rand_range(100, 300), 0)
 
 func _process(delta):
 	position -= velocity * delta
@@ -29,12 +31,17 @@ func shoot():
 	b.transform = $BulletPosition.global_transform
 
 func _on_VisibilityNotifier2D_screen_exited():
+	if $AnimatedSprite.is_visible_in_tree():
+		emit_signal("enemy_escaped")
 	queue_free()
-
-
-func _on_Enemy_area_entered(_area):
-	emit_signal("enemy_hit")
 
 
 func _on_BulletSpawn_timeout():
 	shoot()
+
+func _on_Enemy_body_entered(body):
+	body.plane_died()
+
+
+func _on_Enemy_area_entered(_area):
+	emit_signal("enemy_hit")

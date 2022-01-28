@@ -14,7 +14,7 @@ _data = {
 
 [sub_resource type="Curve2D" id=2]
 _data = {
-"points": PoolVector2Array(  )
+"points": PoolVector2Array( 0, 0, 0, 0, 1920, 896, 0, 0, 0, 0, 1920, 128 )
 }
 
 [node name="Main" type="Node"]
@@ -25,6 +25,7 @@ Coin = ExtResource( 6 )
 [node name="Background" parent="." instance=ExtResource( 5 )]
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
 
 [node name="StartDelay" type="Timer" parent="."]
 wait_time = 2.0
@@ -52,7 +53,7 @@ position = Vector2( 1920, 128 )
 rotation = 1.5708
 
 [node name="CoinsSpawnTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 5.0
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="StartDelay" to="." method="_on_StartDelay_timeout"]

@@ -55,8 +55,8 @@ scale = Vector2( 5.05866, 2.78156 )
 position = Vector2( -51.7129, 10.0794 )
 
 [node name="BulletSpawn" type="Timer" parent="."]
-wait_time = 2.0
 
 [connection signal="area_entered" from="." to="." method="_on_Enemy_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Enemy_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="BulletSpawn" to="." method="_on_BulletSpawn_timeout"]

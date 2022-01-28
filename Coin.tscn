@@ -132,5 +132,5 @@ shape = SubResource( 2 )
 position = Vector2( -0.0378199, -1.06932 )
 scale = Vector2( 4.01703, 3.71671 )
 
-[connection signal="area_entered" from="." to="." method="_on_Coin_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Coin_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -19,6 +19,7 @@ func game_over():
 	get_tree().call_group("enemies", "queue_free")
 	get_tree().call_group("coins", "queue_free")
 	$Player.playing = false
+	$Player.hide()
 	$Menu.show_game_over()
 	$EnemySpawnTimer.stop()
 	$CoinsSpawnTimer.stop()
@@ -56,6 +57,7 @@ func _on_EnemySpawnTimer_timeout():
 	
 func connect_to_enemy(enemy_node):
 	enemy_node.connect("enemy_hit",self,"_on_Player_point")
+	enemy_node.connect("enemy_escaped", self, "_on_Enemy_escaped")
 	
 func _on_CoinsSpawnTimer_timeout():
 	print("Coin spawned")
@@ -92,6 +94,15 @@ func _on_Player_point():
 		print("Plane hitted")
 		score += 1
 		$Menu.update_score(score)
+
+func _on_Enemy_escaped():
+	if $Player.is_visible_in_tree():
+		print("Enemy escaped")
+		if ($Player.bulletcount - 2 == 0):
+			$Player.bulletcount = 0
+		else:
+			$Player.bulletcount -= 2
+		$Menu.update_bulletcount($Player.bulletcount)
 
 
 func _on_Player_shooting():
