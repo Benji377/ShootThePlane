@@ -93,15 +93,17 @@ func _on_Player_point():
 	if $Player.is_visible_in_tree():
 		print("Plane hitted")
 		score += 1
+		$Player.bulletcount += 1
 		$Menu.update_score(score)
+		$Menu.update_bulletcount($Player.bulletcount)
 
 func _on_Enemy_escaped():
 	if $Player.is_visible_in_tree():
 		print("Enemy escaped")
-		if ($Player.bulletcount - 2 == 0):
+		if ($Player.bulletcount - 1 == 0):
 			$Player.bulletcount = 0
 		else:
-			$Player.bulletcount -= 2
+			$Player.bulletcount -= 1
 		$Menu.update_bulletcount($Player.bulletcount)
 
 

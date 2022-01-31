@@ -18,7 +18,7 @@ func _ready():
 	ran = rand_range(0, 100)
 	if (ran <= 25):
 		$BulletSpawn.start()
-		velocity = Vector2(rand_range(100, 300), 0)
+		velocity = Vector2(rand_range(150, 300), 0)
 
 func _process(delta):
 	position -= velocity * delta

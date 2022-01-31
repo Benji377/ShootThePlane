@@ -49,8 +49,8 @@ rotation = 1.5708
 curve = SubResource( 2 )
 
 [node name="CoinsSpawnLocation" type="PathFollow2D" parent="CoinsPath"]
-position = Vector2( 1920, 128 )
-rotation = 1.5708
+position = Vector2( 1920, 896 )
+rotation = -1.5708
 
 [node name="CoinsSpawnTimer" type="Timer" parent="."]
 wait_time = 5.0

@@ -3,7 +3,7 @@ extends KinematicBody2D
 export var bulletcount = 5
 onready var bullet = preload("res://Bullet.tscn")
 
-var speed = 500
+var speed = 600
 var friction = 0.05
 var acceleration = 0.1
 var velocity = Vector2.ZERO
@@ -58,8 +58,8 @@ func shoot():
 	emit_signal("shooting")
 	print("SHOOTING")
 	var b = bullet.instance()
-	owner.add_child(b)
 	b.transform = $BulletPosition.global_transform
+	owner.add_child(b)
 
 func start(pos):
 	position = pos
@@ -68,11 +68,11 @@ func start(pos):
 	
 func plane_died():
 	playing = false
-	$Sprite.hide()
 #	area.queue_free()
 	$CollisionShape2D.set_deferred("disabled", true)
 	$Explosion.play()
 	$ExplosionSound.play()
+	$Sprite.hide()
 	emit_signal("hit")
 	yield(get_tree().create_timer(2.0), "timeout")
 	$Explosion.stop()
