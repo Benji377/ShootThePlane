@@ -14,11 +14,11 @@ func _ready():
 	if (ran >= 0 && ran <= 10):
 		print("Gold coin")
 		$AnimatedSprite.animation = coin_types[1]
-		value = 10
+		value = 5
 	elif (ran > 10 && ran <= 40):
 		print("Silver coin")
 		$AnimatedSprite.animation = coin_types[2]
-		value = 5
+		value = 3
 	else:
 		print("Bronze coin")
 		$AnimatedSprite.animation = coin_types[0]

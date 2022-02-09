@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Menu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Background.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Coin.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Boss.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -21,6 +22,7 @@ _data = {
 script = ExtResource( 2 )
 Enemy = ExtResource( 3 )
 Coin = ExtResource( 6 )
+Boss = ExtResource( 7 )
 
 [node name="Background" parent="." instance=ExtResource( 5 )]
 
@@ -55,6 +57,9 @@ rotation = -1.5708
 [node name="CoinsSpawnTimer" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="BossSpawnTimer" type="Timer" parent="."]
+wait_time = 100.0
+
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
 [connection signal="timeout" from="StartDelay" to="." method="_on_StartDelay_timeout"]
 [connection signal="empty" from="Player" to="." method="game_over"]
@@ -62,3 +67,4 @@ wait_time = 5.0
 [connection signal="shooting" from="Player" to="." method="_on_Player_shooting"]
 [connection signal="start_game" from="Menu" to="." method="new_game"]
 [connection signal="timeout" from="CoinsSpawnTimer" to="." method="_on_CoinsSpawnTimer_timeout"]
+[connection signal="timeout" from="BossSpawnTimer" to="." method="_on_BossSpawnTimer_timeout"]

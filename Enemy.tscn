@@ -9,24 +9,24 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "plane_green",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "plane_blue",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "plane_yellow",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "plane_red",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "plane_green",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "plane_yellow",
 "speed": 5.0
 } ]
 
@@ -52,7 +52,7 @@ position = Vector2( 0.235971, -0.117982 )
 scale = Vector2( 5.05866, 2.78156 )
 
 [node name="BulletPosition" type="Position2D" parent="."]
-position = Vector2( -51.7129, 10.0794 )
+position = Vector2( -51.9719, 10.6631 )
 
 [node name="BulletSpawn" type="Timer" parent="."]
 wait_time = 1.5

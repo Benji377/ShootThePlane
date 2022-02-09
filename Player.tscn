@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://plane_pack/planes/plane_1/plane_1_blue.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -12,6 +12,32 @@
 [ext_resource path="res://plane_pack/explosion_effect/keyframes/explosion_08.png" type="Texture" id=10]
 [ext_resource path="res://plane_pack/explosion_effect/keyframes/explosion_01.png" type="Texture" id=11]
 [ext_resource path="res://plane_pack/explosion_effect/keyframes/explosion_07.png" type="Texture" id=12]
+[ext_resource path="res://plane_pack/planes/plane_1/plane_1_pink.png" type="Texture" id=13]
+[ext_resource path="res://plane_pack/planes/plane_1/plane_1_yellow.png" type="Texture" id=14]
+[ext_resource path="res://plane_pack/planes/plane_1/plane_1_red.png" type="Texture" id=15]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "blue_plane",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "pink_plane",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "yellow_plane",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "red_plane",
+"speed": 5.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 40.3684, 24.0075 )
@@ -29,9 +55,10 @@ collision_layer = 3
 collision_mask = 3
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 1 )
+frames = SubResource( 3 )
+animation = "yellow_plane"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

@@ -3,6 +3,7 @@ extends Node
 var score
 export (PackedScene) var Enemy
 export (PackedScene) var Coin
+export (PackedScene) var Boss
 var bcount = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -18,11 +19,13 @@ func game_over():
 	print("Dead")
 	get_tree().call_group("enemies", "queue_free")
 	get_tree().call_group("coins", "queue_free")
+	get_tree().call_group("boss", "queue_free")
 	$Player.playing = false
 	$Player.hide()
 	$Menu.show_game_over()
 	$EnemySpawnTimer.stop()
 	$CoinsSpawnTimer.stop()
+	$BossSpawnTimer.stop()
 
 
 func new_game():
@@ -78,10 +81,35 @@ func _on_CoinsSpawnTimer_timeout():
 
 func connect_to_coin(coin_node):
 	coin_node.connect("coin_hit", self, "_on_Player_coin_collected")
+	
+
+func _on_BossSpawnTimer_timeout():
+	print("Boss spawn")
+	$EnemySpawnTimer.stop()
+	# Choose a random location on Path2D. --> 2142 and 170
+	$EnemyPath/EnemySpawnLocation.offset = rand_range(1, 760)
+	# Create a Mob instance and add it to the scene.
+	var boss = Boss.instance()
+	add_child(boss)
+	boss.set_owner(self)
+	# Set the mob's direction perpendicular to the path direction.
+	var direction = $EnemyPath/EnemySpawnLocation.rotation + PI / 2
+	# Set the mob's position to a random location.
+	boss.position = $EnemyPath/EnemySpawnLocation.position
+	# Add some randomness to the direction.
+	direction *= 100
+	boss.rotation = direction
+	connect_to_boss(boss)
+
+func connect_to_boss(boss_node):
+	boss_node.connect("boss_escaped", self, "game_over")
+	boss_node.connect("boss_died", self, "_on_Boss_died")
+
 
 func _on_StartDelay_timeout():
 	$EnemySpawnTimer.start()
 	$CoinsSpawnTimer.start()
+	$BossSpawnTimer.start()
 
 func _on_Player_coin_collected():
 	if $Player.is_visible_in_tree():
@@ -96,6 +124,15 @@ func _on_Player_point():
 		$Player.bulletcount += 1
 		$Menu.update_score(score)
 		$Menu.update_bulletcount($Player.bulletcount)
+
+func _on_Boss_died():
+	if $Player.is_visible_in_tree():
+		print("Boss died")
+		score += 5
+		$Player.bulletcount += 10
+		$Menu.update_score(score)
+		$Menu.update_bulletcount($Player.bulletcount)
+		$EnemySpawnTimer.start()
 
 func _on_Enemy_escaped():
 	if $Player.is_visible_in_tree():

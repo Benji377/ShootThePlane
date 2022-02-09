@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Menu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
@@ -15,12 +15,16 @@ action = "ui_enter"
 [sub_resource type="ShortCut" id=3]
 shortcut = SubResource( 2 )
 
+[sub_resource type="DynamicFont" id=4]
+size = 64
+font_data = ExtResource( 2 )
+
 [node name="Menu" type="CanvasLayer"]
 script = ExtResource( 1 )
 
 [node name="ScoreLabel" type="Label" parent="."]
-margin_left = 24.0
-margin_right = 416.0
+margin_left = 226.0
+margin_right = 511.0
 margin_bottom = 78.0
 custom_fonts/font = SubResource( 1 )
 text = "0"
@@ -31,12 +35,12 @@ __meta__ = {
 [node name="BulletLabel" type="Label" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -280.0
-margin_right = -19.0
-margin_bottom = 78.0
+margin_left = -1656.06
+margin_top = 80.6349
+margin_right = -1395.06
+margin_bottom = 158.635
 custom_fonts/font = SubResource( 1 )
 text = "5"
-align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -80,6 +84,28 @@ stream = ExtResource( 4 )
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+
+[node name="ScoreDEsc" type="Label" parent="."]
+margin_left = 2.0
+margin_top = 1.0
+margin_right = 236.0
+margin_bottom = 79.0
+custom_fonts/font = SubResource( 4 )
+text = "Score: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BulletDEsc" type="Label" parent="."]
+margin_left = 6.24261
+margin_top = 75.9533
+margin_right = 240.243
+margin_bottom = 153.953
+custom_fonts/font = SubResource( 4 )
+text = "Bullets:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]

@@ -16,7 +16,10 @@ signal shooting
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
 	screen_size = get_viewport_rect().size
+	var player_types = $Sprite.frames.get_animation_names()
+	$Sprite.animation = player_types[randi() % player_types.size()]
 
 func _physics_process(delta):
 	if playing:

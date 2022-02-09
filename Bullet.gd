@@ -4,6 +4,8 @@ var speed = 750
 var travelling = true;
 
 func _ready():
+	var bullet_types = $Sprite.frames.get_animation_names()
+	$Sprite.animation = bullet_types[randi() % bullet_types.size()]
 	$Rocket.play()
 	yield(get_tree().create_timer(1.0), "timeout")
 	$Rocket.stop()
